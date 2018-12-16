@@ -2,6 +2,11 @@
 # Set parameters here that may be different on each deployment target of the app, e.g. development, staging, production.
 # https://symfony.com/doc/current/best_practices/configuration.html#infrastructure-related-configuration
 parameters:
+    google_credentials_path: ''
+    twitter_consumer_key: ''
+    twitter_consumer_key_secret: ''
+    twitter_consumer_access_token: ''
+    twitter_consumer_access_token_secret: ''
     mailer_transport: smtp
     mailer_host: 127.0.0.1
     mailer_user: ~
