@@ -1,0 +1,8 @@
+version: '3'
+services:
+  php:
+    container_name: php
+    build: ./docker/php
+    volumes:
+      - ./cron/phpquiz-crontab:/etc/cron.d/phpquiz-crontab
+      - .:/var/www
