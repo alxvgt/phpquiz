@@ -17,3 +17,4 @@
 /vendor/
 /web/bundles/
 /app/Resources/google/*
+/app/config/parameters.yml.prod
