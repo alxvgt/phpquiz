@@ -40,9 +40,7 @@ class AppPhpQuizCommand extends ContainerAwareCommand
     {
         $this
             ->setName('app:phpquiz')
-            ->setDescription('...')
-            ->addArgument('argument', InputArgument::OPTIONAL, 'Argument description')
-            ->addOption('option', null, InputOption::VALUE_NONE, 'Option description');
+            ->setDescription('Read a Google spreadsheet and tweet identified quizz');
     }
 
     /**
@@ -60,6 +58,7 @@ class AppPhpQuizCommand extends ContainerAwareCommand
         $today = new \DateTime();
 
         $phpQuiz = $phpQuizFinder->findOneByReference($today->format('dm'));
+        dump($phpQuiz);
 
         $io->success('Completed');
     }

@@ -5,6 +5,12 @@ parameters:
     google_credentials_path: ''
     google_sheet.id: ''
     google_sheet.range: ''
+    google_sheet.mapping:
+        reference: ''
+        question: ''
+        choices: ''
+        goodChoices: ''
+        help: ''
 
     twitter.key: ''
     twitter.key_secret: ''
