@@ -31,6 +31,7 @@ class GoogleSheetsService
 
     /**
      * GoogleSheetsService constructor.
+     *
      * @param string $googleCredentialsPath
      */
     public function __construct(string $googleCredentialsPath)
@@ -86,6 +87,7 @@ class GoogleSheetsService
     /**
      * @param string|null $sheetId
      * @param string|null $sheetRange
+     *
      * @return mixed
      */
     public function getSheetValues(string $sheetId = null, string $sheetRange = null)
@@ -109,6 +111,7 @@ class GoogleSheetsService
 
     /**
      * @param array $values
+     *
      * @return array
      */
     private function reindexSheetValues(array $values)

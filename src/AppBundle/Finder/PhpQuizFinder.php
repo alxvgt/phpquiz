@@ -13,6 +13,7 @@ class PhpQuizFinder
 
     /**
      * PhpQuizFinder constructor.
+     *
      * @param array $phpQuizzes
      */
     public function __construct(array $phpQuizzes)
@@ -30,6 +31,7 @@ class PhpQuizFinder
 
     /**
      * @param $reference
+     *
      * @return PhpQuiz|bool
      */
     public function findOneByReference($reference)

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace AppBundle\Renderer;
 
 use AppBundle\Model\PhpQuiz;
@@ -16,6 +15,7 @@ class PhpQuizRenderer
 
     /**
      * PhpQuizRenderer constructor.
+     *
      * @param Twig_Environment $twig
      */
     public function __construct(Twig_Environment $twig)
@@ -25,7 +25,9 @@ class PhpQuizRenderer
 
     /**
      * @param PhpQuiz $phpQuiz
+     *
      * @return string
+     *
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax

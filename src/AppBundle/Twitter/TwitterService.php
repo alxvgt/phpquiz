@@ -7,7 +7,6 @@ use AppBundle\Twitter\Exception\TwitterApiError;
 
 class TwitterService
 {
-
     /**
      * @var TwitterOAuth
      */
@@ -15,6 +14,7 @@ class TwitterService
 
     /**
      * TwitterService constructor.
+     *
      * @param string $twitterKey
      * @param string $twitterKeySecret
      * @param string $twitterAccessToken
@@ -34,7 +34,9 @@ class TwitterService
     /**
      * @param string $status
      * @param array $mediaIds
+     *
      * @return array|object
+     *
      * @throws TwitterApiError
      */
     public function postTweet(string $status, array $mediaIds = [])
@@ -47,7 +49,7 @@ class TwitterService
             $parameters['media_ids'] = $mediaIds;
         }
 
-        $result = $this->client->post("statuses/update", $parameters);
+        $result = $this->client->post('statuses/update', $parameters);
         $this->processError($result);
 
         return $result;
@@ -55,18 +57,22 @@ class TwitterService
 
     /**
      * @param string $mediaPath
+     *
      * @return array|object
+     *
      * @throws TwitterApiError
      */
     public function uploadMedia(string $mediaPath)
     {
         $result = $this->client->upload('media/upload', ['media' => $mediaPath]);
         $this->processError($result);
+
         return $result;
     }
 
     /**
      * @param $result
+     *
      * @throws TwitterApiError
      */
     private function processError($result)

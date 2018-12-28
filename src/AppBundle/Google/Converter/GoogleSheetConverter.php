@@ -13,6 +13,7 @@ class GoogleSheetConverter
 
     /**
      * GoogleSheetConverter constructor.
+     *
      * @param array $mapping
      */
     public function __construct(array $mapping)
@@ -22,7 +23,9 @@ class GoogleSheetConverter
 
     /**
      * @param array $values
+     *
      * @return array
+     *
      * @throws \Exception
      */
     public function getPhpQuizzes(array $values)
@@ -41,7 +44,7 @@ class GoogleSheetConverter
                 continue;
             }
 
-            $phpquizzes [] = new PhpQuiz(reset($reference), reset($question), $choices, $goodChoices, reset($help));
+            $phpquizzes[] = new PhpQuiz(reset($reference), reset($question), $choices, $goodChoices, reset($help));
         }
 
         return $phpquizzes;
@@ -50,6 +53,7 @@ class GoogleSheetConverter
     /**
      * @param $regexNeedle
      * @param $row
+     *
      * @return array|mixed
      */
     private function searchRowValueFromMapping($regexNeedle, $row)
@@ -63,7 +67,9 @@ class GoogleSheetConverter
     /**
      * @param array $choices
      * @param array $goodChoices
+     *
      * @return array
+     *
      * @throws \Exception
      */
     private function findGoodChoicesFromChoices(array $choices, array $goodChoices)

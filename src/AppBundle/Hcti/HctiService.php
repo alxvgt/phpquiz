@@ -16,7 +16,7 @@ class HctiService
     const HCTI_API_URI_IMAGE = 'image';
     const HCTI_API_URI_PING = 'ping';
 
-    const HCTI_API_BASE_URL = self::HCTI_API_HOST . DIRECTORY_SEPARATOR . self::HCTI_API_VERSION;
+    const HCTI_API_BASE_URL = self::HCTI_API_HOST . \DIRECTORY_SEPARATOR . self::HCTI_API_VERSION;
 
     const HCTI_IMAGE_SAVE_PATH = 'web/hcti/images';
 
@@ -35,6 +35,7 @@ class HctiService
 
     /**
      * HctiService constructor.
+     *
      * @param Client $httpClient
      * @param string $hctiUserId
      * @param string $hctiApiKey
@@ -51,7 +52,9 @@ class HctiService
 
     /**
      * @param string $imageId
+     *
      * @return mixed
+     *
      * @throws HttpException
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
@@ -65,27 +68,30 @@ class HctiService
         }
 
         $options = [
-            'sink' => static::HCTI_IMAGE_SAVE_PATH . DIRECTORY_SEPARATOR . $imageId
+            'sink' => static::HCTI_IMAGE_SAVE_PATH . \DIRECTORY_SEPARATOR . $imageId,
         ];
 
-        return $this->call(Request::METHOD_GET, DIRECTORY_SEPARATOR . static::HCTI_API_URI_IMAGE . DIRECTORY_SEPARATOR . $imageId, $options);
+        return $this->call(Request::METHOD_GET, \DIRECTORY_SEPARATOR . static::HCTI_API_URI_IMAGE . \DIRECTORY_SEPARATOR . $imageId, $options);
     }
 
     /**
      * @return mixed
+     *
      * @throws HttpException
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function ping()
     {
-        return $this->call(Request::METHOD_GET, DIRECTORY_SEPARATOR . static::HCTI_API_URI_PING);
+        return $this->call(Request::METHOD_GET, \DIRECTORY_SEPARATOR . static::HCTI_API_URI_PING);
     }
 
     /**
      * @param string $html
      * @param string|null $css
      * @param bool $downloadImage
+     *
      * @return mixed
+     *
      * @throws HttpException
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
@@ -95,12 +101,13 @@ class HctiService
             RequestOptions::FORM_PARAMS => ['html' => $html, 'css' => $css],
         ];
 
-        $result = $this->call(Request::METHOD_POST, DIRECTORY_SEPARATOR . static::HCTI_API_URI_IMAGE, $options);
+        $result = $this->call(Request::METHOD_POST, \DIRECTORY_SEPARATOR . static::HCTI_API_URI_IMAGE, $options);
         if (!$downloadImage) {
             return $result;
         }
 
         $imageId = $this->getImageIdFromUrl($result['url']);
+
         return $this->retrieveImage($imageId);
     }
 
@@ -116,7 +123,9 @@ class HctiService
      * @param $method
      * @param $uri
      * @param array $options
+     *
      * @return mixed
+     *
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws HttpException
      */
@@ -132,10 +141,10 @@ class HctiService
 
         $isImage = !empty(preg_grep('/.*image\/jpeg.*/', $contentType));
         if ($isImage) {
-            if (isset($options['sink']) && $response->getStatusCode() == Response::HTTP_OK) {
+            if (isset($options['sink']) && Response::HTTP_OK == $response->getStatusCode()) {
                 return $options['sink'];
             }
-            throw new HttpException("Unable to find filename within response wit h content-type image/jpeg");
+            throw new HttpException('Unable to find filename within response wit h content-type image/jpeg');
         }
 
         $isJson = !empty(preg_grep('/.*application\/json.*/', $contentType));
@@ -148,10 +157,11 @@ class HctiService
 
     /**
      * @param $url
+     *
      * @return mixed
      */
     private function getImageIdFromUrl($url)
     {
-        return str_replace(static::HCTI_API_BASE_URL . DIRECTORY_SEPARATOR . static::HCTI_API_URI_IMAGE . DIRECTORY_SEPARATOR, '', $url);
+        return str_replace(static::HCTI_API_BASE_URL . \DIRECTORY_SEPARATOR . static::HCTI_API_URI_IMAGE . \DIRECTORY_SEPARATOR, '', $url);
     }
 }

@@ -45,6 +45,7 @@ class AppPhpQuizCommand extends ContainerAwareCommand
 
     /**
      * AppPhpQuizCommand constructor.
+     *
      * @param GoogleSheetsService $googleSheetsService
      * @param TwitterService $twitterService
      * @param HctiService $hctiService
@@ -79,7 +80,9 @@ class AppPhpQuizCommand extends ContainerAwareCommand
     /**
      * @param InputInterface $input
      * @param OutputInterface $output
+     *
      * @return int|void|null
+     *
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -128,6 +131,7 @@ class AppPhpQuizCommand extends ContainerAwareCommand
 
     /**
      * @return PhpQuizFinder
+     *
      * @throws \Exception
      */
     private function getPhpQuizFinder()
@@ -135,11 +139,13 @@ class AppPhpQuizCommand extends ContainerAwareCommand
         $values = $this->googleSheetsService->getSheetValues();
         $converter = $this->googleSheetsService->getConverter();
         $phpQuizzes = $converter->getPhpQuizzes($values);
+
         return new PhpQuizFinder($phpQuizzes);
     }
 
     /**
      * @param \Exception $e
+     *
      * @return int
      */
     private function sendExceptionMail(\Exception $e)
@@ -153,6 +159,7 @@ class AppPhpQuizCommand extends ContainerAwareCommand
         $message->setSubject('[' . $this->getName() . '] Exception ' . substr($e->getMessage(), 0, 15) . '...');
         $message->setTo(['phpquizz@gmail.com']);
         $message->setBody($title . $content, 'text/html');
+
         return $this->mailer->send($message);
     }
 
@@ -161,7 +168,9 @@ class AppPhpQuizCommand extends ContainerAwareCommand
      * @param SymfonyStyle $io
      * @param PhpQuiz $phpQuiz
      * @param $code
+     *
      * @return bool|mixed
+     *
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \AppBundle\Hcti\Exception\HttpException
      */

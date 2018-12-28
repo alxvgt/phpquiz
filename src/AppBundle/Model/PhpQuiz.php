@@ -27,6 +27,7 @@ class PhpQuiz
 
     /**
      * PhpQuiz constructor.
+     *
      * @param string $reference
      * @param string $question
      * @param array $choices
