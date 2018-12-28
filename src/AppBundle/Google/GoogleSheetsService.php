@@ -2,7 +2,6 @@
 
 namespace AppBundle\Google;
 
-
 use AppBundle\Google\Converter\GoogleSheetConverter;
 use Google_Client;
 use Google_Service_Sheets;
@@ -131,5 +130,4 @@ class GoogleSheetsService
     {
         return new GoogleSheetConverter($this->sheetMapping);
     }
-
 }

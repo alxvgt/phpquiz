@@ -2,7 +2,6 @@
 
 namespace AppBundle\Twitter;
 
-
 use Abraham\TwitterOAuth\TwitterOAuth;
 use AppBundle\Twitter\Exception\TwitterApiError;
 
@@ -74,7 +73,6 @@ class TwitterService
     {
         if (isset($result['error'])) {
             throw  new TwitterApiError('Twitter Api Error : ['.$result['code'].'] '.$result['message']);
-}
+        }
     }
-
 }

@@ -2,7 +2,6 @@
 
 namespace AppBundle\Finder;
 
-
 use AppBundle\Model\PhpQuiz;
 
 class PhpQuizFinder
@@ -44,5 +43,4 @@ class PhpQuizFinder
 
         return false;
     }
-
 }

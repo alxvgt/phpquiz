@@ -2,7 +2,6 @@
 
 namespace AppBundle\Tokenizer;
 
-
 class Tokenizer
 {
     /**

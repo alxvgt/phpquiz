@@ -51,7 +51,8 @@ class AppPhpQuizCommand extends ContainerAwareCommand
      * @param \Swift_Mailer $mailer
      * @param PhpQuizRenderer $phpQuizRenderer
      */
-    public function __construct(GoogleSheetsService $googleSheetsService,
+    public function __construct(
+        GoogleSheetsService $googleSheetsService,
                                 TwitterService $twitterService,
                                 HctiService $hctiService,
                                 Swift_Mailer $mailer,
@@ -85,7 +86,6 @@ class AppPhpQuizCommand extends ContainerAwareCommand
     {
         $io = new SymfonyStyle($input, $output);
         try {
-
             $io->section('Processing...');
 
             $io->text('Requesting Google Sheet...');
@@ -117,7 +117,6 @@ class AppPhpQuizCommand extends ContainerAwareCommand
             $tweetData = $this->twitterService->postTweet($status, [$mediaId]);
 
             $io->success('Completed (tweet id : ' . $tweetData['id_str'] . ' )');
-
         } catch (\Exception $e) {
             $io->section('An exception occured, sending mail ...');
             if ($this->sendExceptionMail($e)) {
@@ -196,5 +195,4 @@ class AppPhpQuizCommand extends ContainerAwareCommand
 
         return $imagePath;
     }
-
 }

@@ -3,7 +3,6 @@
 
 namespace AppBundle\Renderer;
 
-
 use AppBundle\Model\PhpQuiz;
 use Twig_Environment;
 
@@ -35,5 +34,4 @@ class PhpQuizRenderer
     {
         return $this->twig->render(static::TWIG_BASE_PATH . '/default.twig', ['phpquiz' => $phpQuiz]);
     }
-
 }

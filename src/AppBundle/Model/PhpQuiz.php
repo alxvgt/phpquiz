@@ -2,7 +2,6 @@
 
 namespace AppBundle\Model;
 
-
 class PhpQuiz
 {
     /**
@@ -87,9 +86,8 @@ class PhpQuiz
      * @param string $search
      * @param string $replace
      */
-    public function replaceInQuestion(string $search, string $replace){
+    public function replaceInQuestion(string $search, string $replace)
+    {
         $this->question = str_replace($search, $replace, $this->question);
     }
-
-
 }

@@ -2,7 +2,6 @@
 
 namespace AppBundle\Google\Converter;
 
-
 use AppBundle\Model\PhpQuiz;
 
 class GoogleSheetConverter
@@ -30,7 +29,6 @@ class GoogleSheetConverter
     {
         $phpquizzes = [];
         foreach ($values as $row) {
-
             $reference = $this->searchRowValueFromMapping($this->mapping['reference'], $row);
             $question = $this->searchRowValueFromMapping($this->mapping['question'], $row);
             $choices = $this->searchRowValueFromMapping($this->mapping['choices'], $row);

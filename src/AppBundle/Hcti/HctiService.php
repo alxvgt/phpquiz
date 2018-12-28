@@ -2,7 +2,6 @@
 
 namespace AppBundle\Hcti;
 
-
 use AppBundle\Hcti\Exception\HttpException;
 use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
