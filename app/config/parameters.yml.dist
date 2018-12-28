@@ -2,17 +2,27 @@
 parameters:
     secret: ThisTokenIsNotSoSecretChangeIt
 
-    google_credentials_path: ''
-    google_sheet.id: ''
-    google_sheet.range: ''
-    google_sheet.mapping:
-        reference: ''
-        question: ''
-        choices: ''
-        goodChoices: ''
-        help: ''
+    mailer_transport:  ~
+    mailer_host:       ~
+    mailer_port:       ~
+    mailer_user:       ~
+    mailer_password:   ~
+    mailer_sender: ~
 
-    twitter.key: ''
-    twitter.key_secret: ''
-    twitter.access_token: ''
-    twitter.access_token_secret: ''
+    google_credentials_path: ~
+    google_sheet.id: ~
+    google_sheet.range: ~
+    google_sheet.mapping:
+        reference: ~
+        question: ~
+        choices: ~
+        goodChoices: ~
+        help: ~
+
+    twitter.key: ~
+    twitter.key_secret: ~
+    twitter.access_token: ~
+    twitter.access_token_secret: ~
+
+    hcti.user_id: ~
+    hcti.api_key: ~

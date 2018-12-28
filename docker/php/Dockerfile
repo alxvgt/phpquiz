@@ -45,7 +45,9 @@ RUN apt-get install -q -y --no-install-recommends \
     wget \
     tree \
     procps \
-    gdb-minimal
+    gdb-minimal \
+    iputils-ping \
+    telnet
 
 # Install xdebug for coverage purpose
 #RUN pecl install https://xdebug.org/files/xdebug-2.6.1.tgz \

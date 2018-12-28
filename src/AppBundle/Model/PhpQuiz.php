@@ -83,5 +83,13 @@ class PhpQuiz
         return $this->help;
     }
 
+    /**
+     * @param string $search
+     * @param string $replace
+     */
+    public function replaceInQuestion(string $search, string $replace){
+        $this->question = str_replace($search, $replace, $this->question);
+    }
+
 
 }

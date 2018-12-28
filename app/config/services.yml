@@ -19,6 +19,8 @@ services:
       $twitterKeySecret: '%twitter.key_secret%'
       $twitterAccessToken: '%twitter.access_token%'
       $twitterAcessTokenSecret: '%twitter.access_token_secret%'
+      $hctiUserId: '%hcti.user_id%'
+      $hctiApiKey: '%hcti.api_key%'
 
   # makes classes in src/AppBundle available to be used as services
   # this creates a service per class whose id is the fully-qualified class name
@@ -42,4 +44,7 @@ services:
       - [setSheetRange, ['%google_sheet.range%']]
       - [setFirstLineAsHeader, [true]]
       - [setSheetMapping, ['%google_sheet.mapping%']]
+
+  GuzzleHttp\Client:
+    class: GuzzleHttp\Client
 

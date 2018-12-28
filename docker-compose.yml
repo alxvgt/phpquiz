@@ -6,3 +6,8 @@ services:
     volumes:
       - ./cron/phpquiz-crontab:/etc/cron.d/phpquiz-crontab
       - .:/var/www
+  mailcatcher:
+    container_name: mailcatcher
+    image: schickling/mailcatcher
+    ports:
+      - "1080:1080"
