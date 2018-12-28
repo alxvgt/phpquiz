@@ -16,5 +16,6 @@
 !var/SymfonyRequirements.php
 /vendor/
 /web/bundles/
+/web/hcti/
 /app/Resources/google/*
 /app/config/parameters.yml.prod
