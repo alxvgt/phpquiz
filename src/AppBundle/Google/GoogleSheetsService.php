@@ -76,7 +76,7 @@ class GoogleSheetsService
      */
     private function getClient()
     {
-        putenv('GOOGLE_APPLICATION_CREDENTIALS=' . $this->googleCredentialsPath);
+        putenv('GOOGLE_APPLICATION_CREDENTIALS='.$this->googleCredentialsPath);
         $client = new Google_Client();
         $client->addScope(Google_Service_Sheets::SPREADSHEETS_READONLY);
         $client->useApplicationDefaultCredentials();

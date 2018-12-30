@@ -31,16 +31,13 @@ rm -rf var/cache/*
 php bin/console cache:warmup --env=prod --no-debug
 php bin/console cache:warmup --env=dev --no-debug
 
-#echo -e "\e[32m> Ensure git hooks are enabled ...\e[0m"
-#chmod -R 0777 .git-templates/hooks
-#chmod -R 0777 .git
-#git init
-#git config --global core.fileMode false
-#git config --global core.autocrlf input
-#git config --global color.ui auto
-#git config core.fileMode false
-#git config core.autocrlf input
-#git config color.ui auto
+echo -e "\e[32m> Ensure git configuration ...\e[0m"
+chmod -R 0777 app/Resources/git
+git init
+git config core.fileMode false
+git config core.autocrlf input
+git config color.ui auto
+cp -f app/Resources/git/hooks/pre-commit .git/hooks/pre-commit
 
 #echo -e "\e[32m> Migrating database ...\e[0m"
 #php bin/console doctrine:migrations:migrate --env=prod -n

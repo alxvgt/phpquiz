@@ -34,6 +34,6 @@ class PhpQuizRenderer
      */
     public function render(PhpQuiz $phpQuiz)
     {
-        return $this->twig->render(static::TWIG_BASE_PATH . '/default.twig', ['phpquiz' => $phpQuiz]);
+        return $this->twig->render(static::TWIG_BASE_PATH.'/default.twig', ['phpquiz' => $phpQuiz]);
     }
 }

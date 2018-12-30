@@ -16,7 +16,7 @@ class HctiService
     const HCTI_API_URI_IMAGE = 'image';
     const HCTI_API_URI_PING = 'ping';
 
-    const HCTI_API_BASE_URL = self::HCTI_API_HOST . \DIRECTORY_SEPARATOR . self::HCTI_API_VERSION;
+    const HCTI_API_BASE_URL = self::HCTI_API_HOST.\DIRECTORY_SEPARATOR.self::HCTI_API_VERSION;
 
     const HCTI_IMAGE_SAVE_PATH = 'web/hcti/images';
 
@@ -64,14 +64,14 @@ class HctiService
             && false === strpos($imageId, 'png')
             && false === strpos($imageId, 'webp')
         ) {
-            $imageId = $imageId . '.jpeg';
+            $imageId = $imageId.'.jpeg';
         }
 
         $options = [
-            'sink' => static::HCTI_IMAGE_SAVE_PATH . \DIRECTORY_SEPARATOR . $imageId,
+            'sink' => static::HCTI_IMAGE_SAVE_PATH.\DIRECTORY_SEPARATOR.$imageId,
         ];
 
-        return $this->call(Request::METHOD_GET, \DIRECTORY_SEPARATOR . static::HCTI_API_URI_IMAGE . \DIRECTORY_SEPARATOR . $imageId, $options);
+        return $this->call(Request::METHOD_GET, \DIRECTORY_SEPARATOR.static::HCTI_API_URI_IMAGE.\DIRECTORY_SEPARATOR.$imageId, $options);
     }
 
     /**
@@ -82,13 +82,13 @@ class HctiService
      */
     public function ping()
     {
-        return $this->call(Request::METHOD_GET, \DIRECTORY_SEPARATOR . static::HCTI_API_URI_PING);
+        return $this->call(Request::METHOD_GET, \DIRECTORY_SEPARATOR.static::HCTI_API_URI_PING);
     }
 
     /**
-     * @param string $html
+     * @param string      $html
      * @param string|null $css
-     * @param bool $downloadImage
+     * @param bool        $downloadImage
      *
      * @return mixed
      *
@@ -101,7 +101,7 @@ class HctiService
             RequestOptions::FORM_PARAMS => ['html' => $html, 'css' => $css],
         ];
 
-        $result = $this->call(Request::METHOD_POST, \DIRECTORY_SEPARATOR . static::HCTI_API_URI_IMAGE, $options);
+        $result = $this->call(Request::METHOD_POST, \DIRECTORY_SEPARATOR.static::HCTI_API_URI_IMAGE, $options);
         if (!$downloadImage) {
             return $result;
         }
@@ -133,7 +133,7 @@ class HctiService
     {
         $response = $this->httpClient->request(
             $method,
-            static::HCTI_API_BASE_URL . $uri,
+            static::HCTI_API_BASE_URL.$uri,
             array_merge($options, $this->getAuthenticationHeader())
         );
 
@@ -162,6 +162,6 @@ class HctiService
      */
     private function getImageIdFromUrl($url)
     {
-        return str_replace(static::HCTI_API_BASE_URL . \DIRECTORY_SEPARATOR . static::HCTI_API_URI_IMAGE . \DIRECTORY_SEPARATOR, '', $url);
+        return str_replace(static::HCTI_API_BASE_URL.\DIRECTORY_SEPARATOR.static::HCTI_API_URI_IMAGE.\DIRECTORY_SEPARATOR, '', $url);
     }
 }

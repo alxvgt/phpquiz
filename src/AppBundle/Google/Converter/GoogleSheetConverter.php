@@ -77,7 +77,7 @@ class GoogleSheetConverter
         $goodChoicesRef = array_intersect_key(array_flip($choices), array_flip($goodChoices));
 
         if (!empty($goodChoices) && !empty($choices) && empty($goodChoicesRef)) {
-            throw new \Exception('Unable to find good choices into choices, keys mismatch. Searching [' . implode(',', array_values($goodChoices)) . '] into [' . implode(',', array_values($choices)) . ']');
+            throw new \Exception('Unable to find good choices into choices, keys mismatch. Searching ['.implode(',', array_values($goodChoices)).'] into ['.implode(',', array_values($choices)).']');
         }
 
         return array_values($goodChoicesRef);

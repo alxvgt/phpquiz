@@ -47,10 +47,10 @@ class AppPhpQuizCommand extends ContainerAwareCommand
      * AppPhpQuizCommand constructor.
      *
      * @param GoogleSheetsService $googleSheetsService
-     * @param TwitterService $twitterService
-     * @param HctiService $hctiService
-     * @param \Swift_Mailer $mailer
-     * @param PhpQuizRenderer $phpQuizRenderer
+     * @param TwitterService      $twitterService
+     * @param HctiService         $hctiService
+     * @param \Swift_Mailer       $mailer
+     * @param PhpQuizRenderer     $phpQuizRenderer
      */
     public function __construct(
         GoogleSheetsService $googleSheetsService,
@@ -58,8 +58,7 @@ class AppPhpQuizCommand extends ContainerAwareCommand
                                 HctiService $hctiService,
                                 Swift_Mailer $mailer,
                                 PhpQuizRenderer $phpQuizRenderer
-    )
-    {
+    ) {
         $this->googleSheetsService = $googleSheetsService;
         $this->twitterService = $twitterService;
         $this->hctiService = $hctiService;
@@ -78,7 +77,7 @@ class AppPhpQuizCommand extends ContainerAwareCommand
     }
 
     /**
-     * @param InputInterface $input
+     * @param InputInterface  $input
      * @param OutputInterface $output
      *
      * @return int|void|null
@@ -98,7 +97,7 @@ class AppPhpQuizCommand extends ContainerAwareCommand
             $io->text('Finding a quizz...');
             $phpQuiz = $phpQuizFinder->findOneByReference($today->format('dm'));
             if (!$phpQuiz) {
-                throw new NoQuizFoundException('No quiz found for reference ' . $today->format('dm'));
+                throw new NoQuizFoundException('No quiz found for reference '.$today->format('dm'));
             }
 
             $io->text('Parsing quizz...');
@@ -119,7 +118,7 @@ class AppPhpQuizCommand extends ContainerAwareCommand
             $status = $this->phpQuizRenderer->render($phpQuiz);
             $tweetData = $this->twitterService->postTweet($status, [$mediaId]);
 
-            $io->success('Completed (tweet id : ' . $tweetData['id_str'] . ' )');
+            $io->success('Completed (tweet id : '.$tweetData['id_str'].' )');
         } catch (\Exception $e) {
             $io->section('An exception occured, sending mail ...');
             if ($this->sendExceptionMail($e)) {
@@ -156,17 +155,17 @@ class AppPhpQuizCommand extends ContainerAwareCommand
         $title = '<h1>Oops !</h1>';
 
         $message = new Swift_Message();
-        $message->setSubject('[' . $this->getName() . '] Exception ' . substr($e->getMessage(), 0, 15) . '...');
+        $message->setSubject('['.$this->getName().'] Exception '.substr($e->getMessage(), 0, 15).'...');
         $message->setTo(['phpquizz@gmail.com']);
-        $message->setBody($title . $content, 'text/html');
+        $message->setBody($title.$content, 'text/html');
 
         return $this->mailer->send($message);
     }
 
     /**
      * @param InputInterface $input
-     * @param SymfonyStyle $io
-     * @param PhpQuiz $phpQuiz
+     * @param SymfonyStyle   $io
+     * @param PhpQuiz        $phpQuiz
      * @param $code
      *
      * @return bool|mixed
@@ -178,7 +177,7 @@ class AppPhpQuizCommand extends ContainerAwareCommand
     {
         $io->text('Beautifing code...');
         $originalCode = $code;
-        $code = '<?php' . $code;
+        $code = '<?php'.$code;
         $code = highlight_string($code, true);
 
         $io->text('Creating source code image...');

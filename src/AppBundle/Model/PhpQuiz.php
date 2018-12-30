@@ -30,8 +30,8 @@ class PhpQuiz
      *
      * @param string $reference
      * @param string $question
-     * @param array $choices
-     * @param array $goodChoices
+     * @param array  $choices
+     * @param array  $goodChoices
      * @param string $help
      */
     public function __construct(string $reference, string $question, array $choices, array $goodChoices, string $help)

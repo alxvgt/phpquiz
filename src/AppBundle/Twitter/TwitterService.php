@@ -33,7 +33,7 @@ class TwitterService
 
     /**
      * @param string $status
-     * @param array $mediaIds
+     * @param array  $mediaIds
      *
      * @return array|object
      *

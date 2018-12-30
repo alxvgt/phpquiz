@@ -38,7 +38,7 @@ class Tokenizer
      */
     private static function findMatches(string $text, string $tokenKey)
     {
-        $regex = '/' . preg_quote($tokenKey, '/') . '(.+)' . preg_quote($tokenKey, '/') . '/smi';
+        $regex = '/'.preg_quote($tokenKey, '/').'(.+)'.preg_quote($tokenKey, '/').'/smi';
         preg_match_all($regex, $text, $matches);
 
         return $matches;
