@@ -14,7 +14,6 @@ use Swift_Mailer;
 use Swift_Message;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\VarDumper\Cloner\VarCloner;
@@ -22,6 +21,8 @@ use Symfony\Component\VarDumper\Dumper\HtmlDumper;
 
 class AppPhpQuizCommand extends ContainerAwareCommand
 {
+    const MODE_DEV = 'dev';
+
     /**
      * @var GoogleSheetsService
      */
@@ -42,6 +43,10 @@ class AppPhpQuizCommand extends ContainerAwareCommand
      * @var PhpQuizRenderer
      */
     private $phpQuizRenderer;
+    /**
+     * @var bool
+     */
+    private $isModeDev = true;
 
     /**
      * AppPhpQuizCommand constructor.
@@ -72,8 +77,7 @@ class AppPhpQuizCommand extends ContainerAwareCommand
     {
         $this
             ->setName('app:phpquiz')
-            ->setDescription('Read a Google spreadsheet and tweet identified quizz')
-            ->addOption('dry-run', 'dr', InputOption::VALUE_NONE, 'Avoid to use data for limited rate APIs');
+            ->setDescription('Read a Google spreadsheet and tweet identified quizz');
     }
 
     /**
@@ -87,6 +91,8 @@ class AppPhpQuizCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $io = new SymfonyStyle($input, $output);
+        $this->isModeDev = ($this->getContainer()->getParameter('mode') == static::MODE_DEV);
+
         try {
             $io->section('Processing...');
 
@@ -121,10 +127,12 @@ class AppPhpQuizCommand extends ContainerAwareCommand
             $io->success('Completed (tweet id : '.$tweetData['id_str'].' )');
         } catch (\Exception $e) {
             $io->section('An exception occured, sending mail ...');
-            if ($this->sendExceptionMail($e)) {
+            if (!$this->isModeDev && $this->sendExceptionMail($e)) {
                 $io->error('Exception email Sent !');
             }
-            dump($e);
+            if ($this->isModeDev) {
+                throw $e;
+            }
         }
     }
 
@@ -183,7 +191,7 @@ class AppPhpQuizCommand extends ContainerAwareCommand
         $io->text('Creating source code image...');
         $imagePath = false;
 
-        if ($input->getOption('dry-run')) {
+        if ($this->isModeDev) {
             $imagePath = $this->hctiService->retrieveImage('0acf1a8c-f69e-499d-be12-4e8bdd204a02');
         }
 
