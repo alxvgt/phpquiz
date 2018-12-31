@@ -69,7 +69,6 @@ RUN usermod -u 1000 www-data
 
 WORKDIR /var/www
 
-ENTRYPOINT ["cron", "-f"]
 CMD ["php-fpm"]
 
 EXPOSE 9000

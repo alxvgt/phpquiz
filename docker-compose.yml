@@ -3,8 +3,8 @@ services:
   php:
     container_name: php
     build: ./docker/php
+    entrypoint: /var/www/docker/php/entrypoint.sh
     volumes:
-      - ./cron/phpquiz-crontab:/etc/cron.d/phpquiz-crontab
       - .:/var/www
   mailcatcher:
     container_name: mailcatcher

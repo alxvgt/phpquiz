@@ -1,0 +1,8 @@
+## START -- PhpQuiz crontab
+
+SHELL=/bin/bash
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+
+0 12 * * * cd /var/www; bin/console app:phpquiz --dry-run >> /var/www/var/logs/cron/app-phpquiz.log 2>&1
+
+## END -- PhpQuiz crontab

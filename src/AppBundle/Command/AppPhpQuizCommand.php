@@ -54,10 +54,10 @@ class AppPhpQuizCommand extends ContainerAwareCommand
      */
     public function __construct(
         GoogleSheetsService $googleSheetsService,
-                                TwitterService $twitterService,
-                                HctiService $hctiService,
-                                Swift_Mailer $mailer,
-                                PhpQuizRenderer $phpQuizRenderer
+        TwitterService $twitterService,
+        HctiService $hctiService,
+        Swift_Mailer $mailer,
+        PhpQuizRenderer $phpQuizRenderer
     ) {
         $this->googleSheetsService = $googleSheetsService;
         $this->twitterService = $twitterService;
@@ -155,8 +155,8 @@ class AppPhpQuizCommand extends ContainerAwareCommand
         $title = '<h1>Oops !</h1>';
 
         $message = new Swift_Message();
-        $message->setSubject('['.$this->getName().'] Exception '.substr($e->getMessage(), 0, 15).'...');
-        $message->setTo(['phpquizz@gmail.com']);
+        $message->setSubject('['.$this->getName().'] '.substr($e->getMessage(), 0, 20).'...');
+        $message->setTo(['phpquizz+error@gmail.com']);
         $message->setBody($title.$content, 'text/html');
 
         return $this->mailer->send($message);
