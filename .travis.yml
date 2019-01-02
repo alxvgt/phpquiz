@@ -9,7 +9,7 @@ branches:
 language: minimal
 
 env:
-  - DOCKER_COMPOSE_VERSION=1.23.0
+  - DOCKER_COMPOSE_VERSION=1.22.0
 
 before_install:
     - sudo service mysql stop
