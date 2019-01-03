@@ -19,8 +19,9 @@ before_install:
     - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
     - chmod +x docker-compose
     - sudo mv docker-compose /usr/local/bin
-    - gzip -dc docker-images/php.tar.gz | docker load
+    - mkdir -p docker-images
+    - test -e docker-images/php.tar.gz && gzip -dc docker-images/php.tar.gz | docker load
 script:
     - bash docker/start.sh
     - docker save php | gzip > docker-images/php.tar.gz
-    - docker exec -ti php bash -c 'bash update.sh'
+    - docker exec -ti php /bin/bash -c 'bash update.sh'
