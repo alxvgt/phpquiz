@@ -20,6 +20,8 @@ before_install:
     - chmod +x docker-compose
     - sudo mv docker-compose /usr/local/bin
     - mkdir -p docker-images
+    - test -e docker-images/php.tar.gz
+    - echo $(test -e docker-images/php.tar.gz)
     - test -e docker-images/php.tar.gz && gzip -dc docker-images/php.tar.gz | docker load
 script:
     - bash docker/start.sh
