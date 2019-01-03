@@ -13,6 +13,10 @@ env:
 
 services:
   - docker
+  
+cache:
+  directories:
+  - docker-images
 
 before_install:
     - sudo rm /usr/local/bin/docker-compose
