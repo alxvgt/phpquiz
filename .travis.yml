@@ -24,9 +24,9 @@ before_install:
     - chmod +x docker-compose
     - sudo mv docker-compose /usr/local/bin
     - mkdir -p docker-images
-    - test -e docker-images/php.tar.gz && (ls -halt docker-images; (gzip -dc docker-images/php.tar.gz | docker load)) || echo 'no php image cache'
+    - test -e docker-images/phpquiz-php.tar.gz && (ls -halt docker-images; (gzip -dc docker-images/phpquiz-php.tar.gz | docker load)) || echo 'no phpquiz-php image cache'
 script:
     - chmod +x docker/php/entrypoint.sh
     - bash docker/start.sh
-    - docker save php | gzip > docker-images/php.tar.gz
-    - docker exec -ti phpquiz-php /bin/bash -c 'bash update.sh; bash test.sh'
+    - docker save phpquiz-php | gzip > docker-images/phpquiz-php.tar.gz
+    - docker exec -ti php /bin/bash -c 'ls -halt vendor; bash update.sh; bash test.sh'
