@@ -26,6 +26,7 @@ before_install:
     - mkdir -p docker-images
     - test -e docker-images/php.tar.gz && (gzip -dc docker-images/php.tar.gz | docker load) || echo 'no php image cache'
 script:
+    - chmod +x docker/php/entrypoint.sh
     - bash docker/start.sh
     - docker save php | gzip > docker-images/php.tar.gz
     - docker exec -ti php /bin/bash -c 'bash update.sh'
