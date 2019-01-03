@@ -25,8 +25,8 @@ before_install:
     - sudo mv docker-compose /usr/local/bin
     - mkdir -p docker-images
     - test -e docker-images/phpquiz-php.tar.gz && (ls -halt docker-images; (gzip -dc docker-images/phpquiz-php.tar.gz | docker load)) || echo 'no phpquiz-php image cache'
-script:
     - chmod +x docker/php/entrypoint.sh
     - bash docker/start.sh
     - docker save phpquiz-php | gzip > docker-images/phpquiz-php.tar.gz
+script:
     - docker exec -ti php /bin/bash -c 'bash update.sh'
