@@ -3,6 +3,7 @@ services:
   php:
     container_name: php
     build: ./docker/php
+    image: phpquiz-php
     entrypoint: /var/www/docker/php/entrypoint.sh
     volumes:
       - .:/var/www
