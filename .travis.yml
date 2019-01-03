@@ -29,4 +29,4 @@ script:
     - chmod +x docker/php/entrypoint.sh
     - bash docker/start.sh
     - docker save phpquiz-php | gzip > docker-images/phpquiz-php.tar.gz
-    - docker exec -ti php /bin/bash -c 'ls -halt vendor; bash update.sh'
+    - docker exec -ti php /bin/bash -c 'bash update.sh'
