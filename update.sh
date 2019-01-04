@@ -42,8 +42,8 @@ git config core.autocrlf input
 git config color.ui auto
 cp -f app/Resources/git/hooks/pre-commit .git/hooks/pre-commit
 
-#echo -e "\e[32m> Migrating database ...\e[0m"
-#php bin/console doctrine:migrations:migrate --env=prod -n
+echo -e "\e[32m> Migrating database ...\e[0m"
+php bin/console doctrine:migrations:migrate --env=prod -n
 
 #echo -e "\e[32m> Dumping assets ...\e[0m"
 #php bin/console assetic:dump --env=prod

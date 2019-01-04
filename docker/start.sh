@@ -2,6 +2,9 @@
 echo -e "\e[32m> Stopping apache ...\e[0m"
 sudo service apache2 stop #in order to free the 80 port
 
+echo -e "\e[32m> Ensure entrypoint executable ...\e[0m"
+chmod +x docker/php/entrypoint.sh
+
 echo -e "\e[32m> Upping containers ...\e[0m"
 sudo docker-compose up --remove-orphans -d
 

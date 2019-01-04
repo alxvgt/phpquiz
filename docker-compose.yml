@@ -12,3 +12,10 @@ services:
     image: schickling/mailcatcher
     ports:
       - "1080:1080"
+  database:
+      container_name: database
+      image: mariadb
+      env_file:
+          - .docker.env
+      ports:
+          - "3306:3306"

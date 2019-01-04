@@ -10,6 +10,7 @@ use AppBundle\Model\PhpQuiz;
 use AppBundle\Renderer\PhpQuizRenderer;
 use AppBundle\Tokenizer\Tokenizer;
 use AppBundle\Twitter\TwitterService;
+use Doctrine\ORM\EntityManagerInterface;
 use Swift_Mailer;
 use Swift_Message;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -47,28 +48,35 @@ class AppPhpQuizCommand extends ContainerAwareCommand
      * @var bool
      */
     private $isModeDev = true;
+    /**
+     * @var EntityManagerInterface
+     */
+    private $em;
 
     /**
      * AppPhpQuizCommand constructor.
      *
-     * @param GoogleSheetsService $googleSheetsService
-     * @param TwitterService      $twitterService
-     * @param HctiService         $hctiService
-     * @param \Swift_Mailer       $mailer
-     * @param PhpQuizRenderer     $phpQuizRenderer
+     * @param GoogleSheetsService    $googleSheetsService
+     * @param TwitterService         $twitterService
+     * @param HctiService            $hctiService
+     * @param \Swift_Mailer          $mailer
+     * @param PhpQuizRenderer        $phpQuizRenderer
+     * @param EntityManagerInterface $em
      */
     public function __construct(
         GoogleSheetsService $googleSheetsService,
         TwitterService $twitterService,
         HctiService $hctiService,
         Swift_Mailer $mailer,
-        PhpQuizRenderer $phpQuizRenderer
+        PhpQuizRenderer $phpQuizRenderer,
+        EntityManagerInterface $em
     ) {
         $this->googleSheetsService = $googleSheetsService;
         $this->twitterService = $twitterService;
         $this->hctiService = $hctiService;
         $this->mailer = $mailer;
         $this->phpQuizRenderer = $phpQuizRenderer;
+        $this->em = $em;
 
         parent::__construct();
     }
@@ -174,7 +182,7 @@ class AppPhpQuizCommand extends ContainerAwareCommand
      * @param InputInterface $input
      * @param SymfonyStyle   $io
      * @param PhpQuiz        $phpQuiz
-     * @param $code
+     * @param                $code
      *
      * @return bool|mixed
      *

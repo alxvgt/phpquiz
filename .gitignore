@@ -1,5 +1,6 @@
 .idea
 .php_cs.cache
+.docker.env
 /.web-server-pid
 /app/config/parameters.yml
 /build/
@@ -20,3 +21,4 @@
 /web/hcti/
 /app/Resources/google/*
 /app/config/parameters.yml.prod
+
