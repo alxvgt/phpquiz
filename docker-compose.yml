@@ -1,21 +1,12 @@
 version: '3'
 services:
-  php:
-    container_name: php
-    build: ./docker/php
-    image: phpquiz-php
-    entrypoint: /var/www/docker/php/entrypoint.sh
-    volumes:
-      - .:/var/www
-  mailcatcher:
-    container_name: mailcatcher
-    image: schickling/mailcatcher
-    ports:
-      - "1080:1080"
-  database:
-      container_name: database
-      image: mariadb
-      env_file:
-          - .docker.env
-      ports:
-          - "3306:3306"
+    php:
+        container_name: php
+        build: ./docker/php
+        image: phpquiz-php
+        entrypoint: /var/www/docker/php/entrypoint.sh
+        volumes:
+            - .:/var/www
+    database:
+        container_name: database
+        image: mariadb

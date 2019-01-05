@@ -29,4 +29,7 @@ before_install:
     - bash docker/start.sh
     - docker save phpquiz-php | gzip > docker-images/phpquiz-php.tar.gz
 script:
+    - docker exec -ti php /bin/bash -c 'bash reset-data.sh'
+    - docker exec -ti php /bin/bash -c 'bash install.sh'
     - docker exec -ti php /bin/bash -c 'bash update.sh'
+    - docker exec -ti php /bin/bash -c 'bash test.sh'
