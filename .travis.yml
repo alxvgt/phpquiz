@@ -1,22 +1,23 @@
 notifications:
-  email:
-    on_success: never
+    email:
+        on_success: never
+        on_failure: change
 
 branches:
-  only:
-  - master
+    only:
+        - master
 
 language: minimal
 
 env:
-  - DOCKER_COMPOSE_VERSION=1.23.0
+    - DOCKER_COMPOSE_VERSION=1.23.0
 
 services:
-  - docker
-  
+    - docker
+
 cache:
-  directories:
-  - docker-images
+    directories:
+        - docker-images
 
 before_install:
     - sudo rm /usr/local/bin/docker-compose
@@ -26,6 +27,7 @@ before_install:
     - mkdir -p docker-images
     - test -e docker-images/phpquiz-php.tar.gz && (ls -halt docker-images; (gzip -dc docker-images/phpquiz-php.tar.gz | docker load)) || echo 'no phpquiz-php image cache'
     - chmod +x docker/php/entrypoint.sh
+    - cp -f docker-compose.override.travis.yml docker-compose.override.yml
     - bash docker/start.sh
     - docker save phpquiz-php | gzip > docker-images/phpquiz-php.tar.gz
 script:

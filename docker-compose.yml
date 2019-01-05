@@ -10,5 +10,7 @@ services:
     database:
         container_name: database
         image: mariadb
+        environment:
+            - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
         volumes:
             - /var/lib/mysql:/var/lib/mysql
