@@ -10,3 +10,5 @@ services:
     database:
         container_name: database
         image: mariadb
+        volumes:
+            - /var/lib/mysql:/var/lib/mysql

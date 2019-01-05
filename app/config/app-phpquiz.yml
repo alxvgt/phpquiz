@@ -1,0 +1,9 @@
+google_sheet:
+    id: 1zCAvEsKFbenhZxzJs9deLls9QrxVvrHfYM52ssprVh0
+    range: 'questions!A1:J366'
+    mapping:
+        reference: /day-month/
+        question: /question/
+        choices: /choice.+/
+        goodChoices: /answer.+/
+        help: /help/

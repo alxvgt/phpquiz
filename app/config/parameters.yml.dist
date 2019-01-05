@@ -12,15 +12,7 @@ parameters:
     mailer_user:       ~
     mailer_password:   ~
     mailer_sender: ~
-    google_credentials_path: ~
-    google_sheet.id: ~
-    google_sheet.range: ~
-    google_sheet.mapping:
-        reference: ~
-        question: ~
-        choices: ~
-        goodChoices: ~
-        help: ~
+    google_api_key: ~
     twitter.key: ~
     twitter.key_secret: ~
     twitter.access_token: ~

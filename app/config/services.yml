@@ -14,7 +14,7 @@ services:
     # if you need to do this, you can override this setting on individual services
     public: false
     bind:
-      $googleCredentialsPath: '%google_credentials_path%'
+      $googleApiKey: '%google_api_key%'
       $twitterKey: '%twitter.key%'
       $twitterKeySecret: '%twitter.key_secret%'
       $twitterAccessToken: '%twitter.access_token%'
@@ -38,13 +38,6 @@ services:
     tags: ['controller.service_arguments']
 
   # add more services, or override services that need manual wiring
-  AppBundle\Google\GoogleSheetsService:
-    calls:
-      - [setSheetId, ['%google_sheet.id%']]
-      - [setSheetRange, ['%google_sheet.range%']]
-      - [setFirstLineAsHeader, [true]]
-      - [setSheetMapping, ['%google_sheet.mapping%']]
-
   GuzzleHttp\Client:
     class: GuzzleHttp\Client
 

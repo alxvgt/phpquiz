@@ -3,6 +3,6 @@
 SHELL=/bin/bash
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 
-0 12 * * * cd /var/www; bin/console app:phpquiz >> /var/www/var/logs/cron/app-phpquiz.log 2>&1
+0 12 * * * cd /var/www; bin/console app:phpquiz app/config/app-phpquiz.yml >> /var/www/var/logs/cron/app-phpquiz.log 2>&1
 
 ## END -- PhpQuiz crontab

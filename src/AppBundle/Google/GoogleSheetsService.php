@@ -11,7 +11,7 @@ class GoogleSheetsService
     /**
      * @var string
      */
-    private $googleCredentialsPath;
+    private $googleApiKey;
     /**
      * @var string
      */
@@ -32,11 +32,11 @@ class GoogleSheetsService
     /**
      * GoogleSheetsService constructor.
      *
-     * @param string $googleCredentialsPath
+     * @param string $googleApiKey
      */
-    public function __construct(string $googleCredentialsPath)
+    public function __construct(string $googleApiKey)
     {
-        $this->googleCredentialsPath = $googleCredentialsPath;
+        $this->googleApiKey = $googleApiKey;
     }
 
     /**
@@ -76,10 +76,10 @@ class GoogleSheetsService
      */
     private function getClient()
     {
-        putenv('GOOGLE_APPLICATION_CREDENTIALS='.$this->googleCredentialsPath);
         $client = new Google_Client();
         $client->addScope(Google_Service_Sheets::SPREADSHEETS_READONLY);
-        $client->useApplicationDefaultCredentials();
+        $client->setApplicationName('PhpQuiz');
+        $client->setDeveloperKey($this->googleApiKey);
 
         return $client;
     }

@@ -14,11 +14,13 @@ use Doctrine\ORM\EntityManagerInterface;
 use Swift_Mailer;
 use Swift_Message;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\VarDumper\Cloner\VarCloner;
 use Symfony\Component\VarDumper\Dumper\HtmlDumper;
+use Symfony\Component\Yaml\Yaml;
 
 class AppPhpQuizCommand extends ContainerAwareCommand
 {
@@ -85,7 +87,8 @@ class AppPhpQuizCommand extends ContainerAwareCommand
     {
         $this
             ->setName('app:phpquiz')
-            ->setDescription('Read a Google spreadsheet and tweet identified quizz');
+            ->setDescription('Read a Google spreadsheet and tweet identified quizz')
+            ->addArgument('config', InputArgument::REQUIRED, 'Command configuration file');
     }
 
     /**
@@ -103,6 +106,14 @@ class AppPhpQuizCommand extends ContainerAwareCommand
 
         try {
             $io->section('Processing...');
+
+            $io->text('Loading configuration...');
+            $configFilePath = $input->getArgument('config');
+            $config = Yaml::parseFile($configFilePath);
+            $this->googleSheetsService->setSheetId($config['google_sheet']['id']);
+            $this->googleSheetsService->setSheetRange($config['google_sheet']['range']);
+            $this->googleSheetsService->setSheetMapping($config['google_sheet']['mapping']);
+            $this->googleSheetsService->setFirstLineAsHeader(true);
 
             $io->text('Requesting Google Sheet...');
             $phpQuizFinder = $this->getPhpQuizFinder();
