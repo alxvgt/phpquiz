@@ -30,8 +30,21 @@ before_install:
     - cp -f docker-compose.override.travis.yml docker-compose.override.yml
     - bash docker/start.sh
     - docker save phpquiz-php | gzip > docker-images/phpquiz-php.tar.gz
-script:
-    - docker exec -ti php /bin/bash -c 'bash reset-data.sh --force'
-    - docker exec -ti php /bin/bash -c 'bash install.sh'
-    - docker exec -ti php /bin/bash -c 'bash update.sh'
-    - docker exec -ti php /bin/bash -c 'bash test.sh'
+
+stages:
+    - test
+    - deploy
+
+jobs:
+    include:
+        -   stage: 'test stage'
+        name: 'test job'
+        script:
+            - docker exec -ti php /bin/bash -c 'bash reset-data.sh --force'
+            - docker exec -ti php /bin/bash -c 'bash install.sh'
+            - docker exec -ti php /bin/bash -c 'bash update.sh'
+            - docker exec -ti php /bin/bash -c 'bash test.sh'
+        -   stage: 'deploy stage'
+        name: 'deploy job'
+        script:
+            - echo 'Deploy job !'
