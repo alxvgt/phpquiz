@@ -1,5 +1,4 @@
 imports:
-    - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
 
@@ -7,14 +6,15 @@ imports:
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
+    mode: '%env(string:APP_MODE)%'
 
 doctrine:
     dbal:
         driver: pdo_mysql
-        host: '%database_host%'
-        dbname: '%database_name%'
-        user: '%database_user%'
-        password: '%database_password%'
+        host: '%env(string:APP_DATABASE_HOST)%'
+        dbname: '%env(string:APP_DATABASE_NAME)%'
+        user: '%env(string:APP_DATABASE_USER)%'
+        password: '%env(string:APP_DATABASE_PASSWORD)%'
         charset: utf8mb4
         default_table_options:
             charset: utf8mb4
@@ -34,7 +34,7 @@ doctrine_migrations:
 framework:
     #esi: ~
     #translator: { fallbacks: ['%locale%'] }
-    secret: '%secret%'
+    secret: '%env(string:APP_SECRET)%'
     router:
         resource: '%kernel.project_dir%/app/config/routing.yml'
         strict_requirements: ~
@@ -60,12 +60,12 @@ twig:
     strict_variables: '%kernel.debug%'
 
 swiftmailer:
-    transport: '%mailer_transport%'
-    host: '%mailer_host%'
-    port: '%mailer_port%'
-    username: '%mailer_user%'
-    password: '%mailer_password%'
-    sender_address: '%mailer_sender%'
+    transport: '%env(string:APP_MAILER_TRANSPORT)%'
+    host: '%env(string:APP_MAILER_HOST)%'
+    port: '%env(string:APP_MAILER_PORT)%'
+    username: '%env(string:APP_MAILER_USER)%'
+    password: '%env(string:APP_MAILER_PASSWORD)%'
+    sender_address: '%env(string:APP_MAILER_SENDER)%'
     spool: { type: memory }
 
 sensio_framework_extra:

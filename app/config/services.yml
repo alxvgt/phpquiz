@@ -14,13 +14,13 @@ services:
     # if you need to do this, you can override this setting on individual services
     public: false
     bind:
-      $googleApiKey: '%google_api_key%'
-      $twitterKey: '%twitter.key%'
-      $twitterKeySecret: '%twitter.key_secret%'
-      $twitterAccessToken: '%twitter.access_token%'
-      $twitterAcessTokenSecret: '%twitter.access_token_secret%'
-      $hctiUserId: '%hcti.user_id%'
-      $hctiApiKey: '%hcti.api_key%'
+      $googleApiKey: '%env(string:APP_GOOGLE_API_KEY)%'
+      $twitterKey: '%env(string:APP_TWITTER_KEY)%'
+      $twitterKeySecret: '%env(string:APP_TWITTER_KEY_SECRET)%'
+      $twitterAccessToken: '%env(string:APP_TWITTER_ACCESS_TOKEN)%'
+      $twitterAcessTokenSecret: '%env(string:APP_TWITTER_ACCESS_TOKEN_SECRET)%'
+      $hctiUserId: '%env(string:APP_HCTI_USER_ID)%'
+      $hctiApiKey: '%env(string:APP_HCTI_API_KEY)%'
 
   # makes classes in src/AppBundle available to be used as services
   # this creates a service per class whose id is the fully-qualified class name

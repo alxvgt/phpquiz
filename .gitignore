@@ -1,5 +1,6 @@
 .idea
 .php_cs.cache
+.env
 docker-compose.override.yml
 /.web-server-pid
 /app/config/parameters.yml
