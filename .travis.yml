@@ -53,10 +53,8 @@ jobs:
                     -in ${SSH_DEPLOY_KEY_PATH}.enc -out ${SSH_DEPLOY_KEY_PATH} -d
                 - eval "$(ssh-agent -s)"
                 - chmod 600 ${SSH_DEPLOY_KEY_PATH}
-                - echo -e "Host $SERVER_IP_ADDRESS\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
-                - cat ~/.ssh/config
-                - echo -e "Host ${SERVER_IP_ADDRESS}\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+                - echo -e "Host ${DEPLOY_SERVER_HOST}\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
                 - cat ~/.ssh/config
                 - ssh-add ${SSH_DEPLOY_KEY_PATH}
             script:
-                - ssh -i  ${SSH_DEPLOY_KEY_PATH} root@${DEPLOY_SERVER_HOST} "hostname"
+                - ssh -i ${SSH_DEPLOY_KEY_PATH} root@${DEPLOY_SERVER_HOST} "hostname"
