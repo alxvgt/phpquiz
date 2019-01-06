@@ -20,7 +20,6 @@ cache:
         - docker-images
 
 stages:
-    - operating stage
     - test stage
     - deploy stage
 
@@ -40,11 +39,12 @@ jobs:
                 - bash docker/start.sh
                 - test -e docker-images/phpquiz-php.tar.gz && echo 'phpquiz-php image cache already exists' || (docker save phpquiz-php | gzip > docker-images/phpquiz-php.tar.gz)
             script:
-                - docker exec -ti php /bin/bash -c 'bash reset-data.sh --force'
                 - docker exec -ti php /bin/bash -c 'bash install.sh'
+                - docker exec -ti php /bin/bash -c 'bash reset-data.sh --force'
                 - docker exec -ti php /bin/bash -c 'bash update.sh'
                 - docker exec -ti php /bin/bash -c 'bash test.sh'
         -   stage: deploy stage
+            if: branch = master
             name: deploy job
             script:
                 - echo 'Deploy job !'
