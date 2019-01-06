@@ -55,8 +55,6 @@ jobs:
                 - cat ~/.ssh/config
                 - ssh-add ${SSH_DEPLOY_KEY_PATH}
             script:
-                - ssh -i ${SSH_DEPLOY_KEY_PATH} root@${DEPLOY_SERVER_HOST} "echo 'Hello on '; hostname"
-                - scp -i ${SSH_DEPLOY_KEY_PATH} app/Resource/deploy/deploy.sh root@${DEPLOY_SERVER_HOST}:deploy.sh
-                - scp -i ${SSH_DEPLOY_KEY_PATH} .env.prod root@${DEPLOY_SERVER_HOST}:.env
-                - scp -i ${SSH_DEPLOY_KEY_PATH} app/Resources/deploy/.deploy.env.prod root@${DEPLOY_SERVER_HOST}:.deploy.env
+                - ssh -i ${SSH_DEPLOY_KEY_PATH} root@${DEPLOY_SERVER_HOST} "echo 'Connected, Hello !!!! '; hostname"
+                - scp -i ${SSH_DEPLOY_KEY_PATH} app/Resources/deploy/deploy.sh root@${DEPLOY_SERVER_HOST}:deploy.sh
                 - ssh -i ${SSH_DEPLOY_KEY_PATH} root@${DEPLOY_SERVER_HOST} "bash deploy.sh"
