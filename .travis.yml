@@ -18,7 +18,6 @@ stages:
 before_install:
     - openssl aes-256-cbc -K $encrypted_05beada88e3a_key -iv $encrypted_05beada88e3a_iv
         -in ${SSH_DEPLOY_KEY_PATH}.enc -out ${SSH_DEPLOY_KEY_PATH} -d
-    - ssh-add ${SSH_DEPLOY_KEY_PATH}
 
 jobs:
     include:
