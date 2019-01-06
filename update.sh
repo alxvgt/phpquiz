@@ -16,10 +16,7 @@ cd ${basedir}
 echo -e "\e[32m> Installing dependencies ...\e[0m"
 composer install -o -n 2>&1
 
-echo -e "\e[32m> Setting cache and logs directories permissions ...\e[0m"
-if [[ ! -d var/logs/cron/ ]]; then
-    mkdir -p var/logs/cron/
-fi
+echo -e "\e[32m> Setting var directories permissions ...\e[0m"
 if [[ ! -d var/sessions ]]; then
     mkdir var/sessions
 fi

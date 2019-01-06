@@ -20,13 +20,13 @@ cache:
         - docker-images
 
 stages:
-    - test stage
-    - deploy stage
+    - test
+    - deploy
 
 jobs:
     include:
-        -   stage: test stage
-            name: test job
+        -   stage: test
+            name: test
             before_install:
                 - sudo rm /usr/local/bin/docker-compose
                 - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
@@ -43,8 +43,8 @@ jobs:
                 - docker exec -ti php /bin/bash -c 'bash reset-data.sh --force'
                 - docker exec -ti php /bin/bash -c 'bash update.sh'
                 - docker exec -ti php /bin/bash -c 'bash test.sh'
-        -   stage: deploy stage
+        -   stage: deploy
             if: branch = master
-            name: deploy job
+            name: deploy
             script:
                 - echo 'Deploy job !'
