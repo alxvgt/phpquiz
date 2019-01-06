@@ -16,7 +16,7 @@ cache:
     directories:
         - docker-images
         - vendor
-        - ${COMPOSER_CACHE_DIR}
+        - $COMPOSER_CACHE_DIR
 
 stages:
     - test
