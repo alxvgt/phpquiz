@@ -1,10 +1,9 @@
 .idea
 .php_cs.cache
-.env
-docker-compose.override.yml
 **/deploy_key
-**/.deploy.env.prod
-**/.env.prod
+**/.deploy.env
+**/.env
+docker-compose.override.yml
 /.web-server-pid
 /app/config/parameters.yml
 /build/

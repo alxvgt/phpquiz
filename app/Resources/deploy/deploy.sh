@@ -7,6 +7,8 @@ test -d ${SERVER_APP_PATH} && (cd ${SERVER_APP_PATH} && git checkout master && g
 cp -f .env ${SERVER_APP_PATH}/.env
 cp -f .deploy.env ${SERVER_APP_PATH}/.deploy.env
 cd ${SERVER_APP_PATH}
-ls -halt
-cat .env
-cat .deploy.env
+bash docker/start.sh
+docker exec -ti php /bin/bash -c 'bash install.sh'
+docker exec -ti php /bin/bash -c 'sleep 2; bash reset-data.sh --force'
+docker exec -ti php /bin/bash -c 'bash update.sh'
+docker exec -ti php /bin/bash -c 'bash test.sh'
