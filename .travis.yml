@@ -56,5 +56,5 @@ jobs:
                 - eval "$(ssh-agent -s)"
                 - chmod 600 ${SSH_DEPLOY_KEY_PATH}
                 - echo -e "Host $SERVER_IP_ADDRESS\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
-                - ssh-add {SSH_DEPLOY_KEY_PATH}
-                - ssh -i  {SSH_DEPLOY_KEY_PATH} root@${DEPLOY_SERVER_HOST} "hostname"
+                - ssh-add ${SSH_DEPLOY_KEY_PATH}
+                - ssh -i  ${SSH_DEPLOY_KEY_PATH} root@${DEPLOY_SERVER_HOST} "hostname"
