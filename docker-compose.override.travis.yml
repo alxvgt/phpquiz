@@ -2,6 +2,7 @@ version: '3'
 services:
     php:
         environment:
+            - COMPOSER_CACHE_DIR=${COMPOSER_CACHE_DIR}
             - APP_SECRET=${APP_SECRET}
             - APP_MODE=${APP_MODE}
             - APP_DATABASE_HOST=${APP_DATABASE_HOST}

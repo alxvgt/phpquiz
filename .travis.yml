@@ -7,6 +7,7 @@ language: minimal
 
 env:
     - DOCKER_COMPOSE_VERSION=1.23.0
+    - COMPOSER_CACHE_DIR=.composer/cache
 
 services:
     - docker
@@ -14,6 +15,8 @@ services:
 cache:
     directories:
         - docker-images
+        - vendor
+        - ${COMPOSER_CACHE_DIR}
 
 stages:
     - test
@@ -35,8 +38,6 @@ jobs:
                 - bash docker/start.sh
                 - test -e docker-images/phpquiz-php.tar.gz && echo 'phpquiz-php image cache already exists' || (docker save phpquiz-php | gzip > docker-images/phpquiz-php.tar.gz)
             script:
-                - docker exec -ti php /bin/bash -c 'composer config bin-dir'
-                - docker exec -ti php /bin/bash -c 'ls -halt vendor'
                 - docker exec -ti php /bin/bash -c 'bash install.sh'
                 - docker exec -ti php /bin/bash -c 'bash reset-data.sh --force'
                 - docker exec -ti php /bin/bash -c 'bash update.sh'
