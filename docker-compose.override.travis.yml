@@ -22,6 +22,3 @@ services:
             - APP_TWITTER_ACCESS_TOKEN_SECRET=${APP_TWITTER_ACCESS_TOKEN_SECRET}
             - APP_HCTI_USER_ID=${APP_HCTI_USER_ID}
             - APP_HCTI_API_KEY=${APP_HCTI_API_KEY}
-    database:
-        environment:
-            - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
