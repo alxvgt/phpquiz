@@ -6,8 +6,9 @@ notifications:
 language: minimal
 
 env:
-    - DOCKER_COMPOSE_VERSION=1.23.0
-    - COMPOSER_CACHE_DIR=.composer/cache
+    global:
+        - DOCKER_COMPOSE_VERSION=1.23.0
+        - COMPOSER_CACHE_DIR=.composer/cache
 
 services:
     - docker
