@@ -1,11 +1,7 @@
 notifications:
     email:
-        on_success: never
+        on_success: change
         on_failure: change
-
-branches:
-    only:
-        - master
 
 language: minimal
 
