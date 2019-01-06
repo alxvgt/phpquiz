@@ -32,19 +32,19 @@ before_install:
     - docker save phpquiz-php | gzip > docker-images/phpquiz-php.tar.gz
 
 stages:
-    - test
-    - deploy
+    - test stage
+    - deploy stage
 
 jobs:
     include:
-        -   stage: 'test stage'
-        name: 'test job'
-        script:
-            - docker exec -ti php /bin/bash -c 'bash reset-data.sh --force'
-            - docker exec -ti php /bin/bash -c 'bash install.sh'
-            - docker exec -ti php /bin/bash -c 'bash update.sh'
-            - docker exec -ti php /bin/bash -c 'bash test.sh'
-        -   stage: 'deploy stage'
-        name: 'deploy job'
-        script:
-            - echo 'Deploy job !'
+        -   stage: test stage
+            name: test job
+            script:
+                - docker exec -ti php /bin/bash -c 'bash reset-data.sh --force'
+                - docker exec -ti php /bin/bash -c 'bash install.sh'
+                - docker exec -ti php /bin/bash -c 'bash update.sh'
+                - docker exec -ti php /bin/bash -c 'bash test.sh'
+        -   stage: deploy stage
+            name: deploy job
+            script:
+                - echo 'Deploy job !'
