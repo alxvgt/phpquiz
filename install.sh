@@ -24,11 +24,6 @@ fi
 echo -e "\e[32m> Installing dependencies ...\e[0m"
 composer install -o -n 2>&1
 
-echo -e "\e[32m> Clearing and warming up caches ...\e[0m"
-rm -rf var/cache/*
-php bin/console cache:warmup --env=prod --no-debug
-php bin/console cache:warmup --env=dev --no-debug
-
 echo -e "\e[32m> Installing crontab ...\e[0m"
 crontab ./app/Resources/server/cron/crontab
 crontab -l
