@@ -26,13 +26,7 @@ then
 fi
 
 echo -e "\e[32m> Dropping database ...\e[0m"
-php bin/console doctrine:database:drop --force
-
-echo -e "\e[32m> Creating database ...\e[0m"
-php bin/console doctrine:database:create
-
-echo -e "\e[32m> Migrating database ...\e[0m"
-php bin/console doctrine:migrations:migrate -n
+php bin/console doctrine:database:drop --if-exists --force
 
 echo -e "\e[32m> Clearing caches...\e[0m"
 rm -rf var/cache/*

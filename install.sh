@@ -27,3 +27,6 @@ composer install -o -n 2>&1
 echo -e "\e[32m> Installing crontab ...\e[0m"
 crontab ./app/Resources/server/cron/crontab
 crontab -l
+
+echo -e "\e[32m> Creating database ...\e[0m"
+php bin/console doctrine:database:create --if-not-exists
