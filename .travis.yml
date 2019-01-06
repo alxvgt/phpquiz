@@ -14,7 +14,6 @@ services:
 stages:
     - test
     - deploy
-
 jobs:
     include:
         -   stage: test
@@ -39,8 +38,7 @@ jobs:
 #                - bash docker/start.sh
 #                - test -e docker-images/phpquiz-php.tar.gz && echo 'phpquiz-php image cache already
 #                    exists' || (docker save phpquiz-php | gzip > docker-images/phpquiz-php.tar.gz)
-            script:
-                - echo 'ok'
+#            script:
 #                - docker exec -ti php /bin/bash -c 'bash install.sh'
 #                - docker exec -ti php /bin/bash -c 'sleep 2; bash reset-data.sh --force'
 #                - docker exec -ti php /bin/bash -c 'bash update.sh'
@@ -51,10 +49,18 @@ jobs:
             before_install:
                 - openssl aes-256-cbc -K $encrypted_05beada88e3a_key -iv $encrypted_05beada88e3a_iv
                     -in ${SSH_DEPLOY_KEY_PATH}.enc -out ${SSH_DEPLOY_KEY_PATH} -d
+                - openssl aes-256-cbc -K $encrypted_05beada88e3a_key -iv $encrypted_05beada88e3a_iv
+                    -in app/Resources/deploy/.deploy.env.prod.enc -out app/Resources/deploy/.deploy.env.prod -d
+                - openssl aes-256-cbc -K $encrypted_05beada88e3a_key -iv $encrypted_05beada88e3a_iv
+                    -in .env.prod.enc -out .env.prod -d
                 - eval "$(ssh-agent -s)"
                 - chmod 600 ${SSH_DEPLOY_KEY_PATH}
                 - echo -e "Host ${DEPLOY_SERVER_HOST}\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
                 - cat ~/.ssh/config
                 - ssh-add ${SSH_DEPLOY_KEY_PATH}
             script:
-                - ssh -i ${SSH_DEPLOY_KEY_PATH} root@${DEPLOY_SERVER_HOST} "hostname"
+                - ssh -i ${SSH_DEPLOY_KEY_PATH} root@${DEPLOY_SERVER_HOST} "echo 'Hello on '; hostname"
+                - scp -i ${SSH_DEPLOY_KEY_PATH} app/Resource/deploy/deploy.sh root@${DEPLOY_SERVER_HOST}:deploy.sh
+                - scp -i ${SSH_DEPLOY_KEY_PATH} .env.prod root@${DEPLOY_SERVER_HOST}:.env
+                - scp -i ${SSH_DEPLOY_KEY_PATH} app/Resources/deploy/.deploy.env.prod root@${DEPLOY_SERVER_HOST}:.deploy.env
+                - ssh -i ${SSH_DEPLOY_KEY_PATH} root@${DEPLOY_SERVER_HOST} "bash deploy.sh"

@@ -3,6 +3,8 @@
 .env
 docker-compose.override.yml
 **/deploy_key
+**/.deploy.env.prod
+**/.env.prod
 /.web-server-pid
 /app/config/parameters.yml
 /build/
