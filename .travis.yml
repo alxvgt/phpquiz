@@ -16,8 +16,8 @@ stages:
     - deploy
 jobs:
     include:
-        -   stage: test
-            name: test
+#        -   stage: test
+#            name: test
 #            cache:
 #                directories:
 #                    - docker-images
