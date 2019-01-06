@@ -107,7 +107,7 @@ class AppPhpQuizCommand extends ContainerAwareCommand
         try {
             $io->section('Processing...');
 
-            $io->text('Loading configuration. ..');
+            $io->text('Loading configuration...');
             $configFilePath = $input->getArgument('config');
             $config = Yaml::parseFile($configFilePath);
             $this->googleSheetsService->setSheetId($config['google_sheet']['id']);
