@@ -16,32 +16,32 @@ stages:
     - deploy
 jobs:
     include:
-        #        -   stage: test
-        #            name: test
-        #            cache:
-        #                directories:
-        #                    - docker-images
-        #                    - vendor
-        #                    - "$COMPOSER_CACHE_DIR"
-        #            before_install:
-        #                - sudo rm /usr/local/bin/docker-compose
-        #                - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname
-        #                    -s`-`uname -m` > docker-compose
-        #                - chmod +x docker-compose
-        #                - sudo mv docker-compose /usr/local/bin
-        #                - mkdir -p docker-images
-        #                - test -e docker-images/phpquiz-php.tar.gz && (ls -halt docker-images; (gzip -dc
-        #                    docker-images/phpquiz-php.tar.gz | docker load)) || echo 'no phpquiz-php image
-        #                    cache'
-        #                - cp -f docker-compose.override.travis.yml docker-compose.override.yml
-        #                - bash docker/start.sh
-        #                - test -e docker-images/phpquiz-php.tar.gz && echo 'phpquiz-php image cache already
-        #                    exists' || (docker save phpquiz-php | gzip > docker-images/phpquiz-php.tar.gz)
-        #            script:
-        #                - docker exec -ti php /bin/bash -c 'bash install.sh'
-        #                - docker exec -ti php /bin/bash -c 'sleep 2; bash reset-data.sh --force'
-        #                - docker exec -ti php /bin/bash -c 'bash update.sh'
-        #                - docker exec -ti php /bin/bash -c 'bash test.sh'
+        -   stage: test
+            name: test
+            cache:
+                directories:
+                    - docker-images
+                    - vendor
+                    - "$COMPOSER_CACHE_DIR"
+            before_install:
+                - sudo rm /usr/local/bin/docker-compose
+                - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname
+                    -s`-`uname -m` > docker-compose
+                - chmod +x docker-compose
+                - sudo mv docker-compose /usr/local/bin
+                - mkdir -p docker-images
+                - test -e docker-images/phpquiz-php.tar.gz && (ls -halt docker-images; (gzip -dc
+                    docker-images/phpquiz-php.tar.gz | docker load)) || echo 'no phpquiz-php image
+                    cache'
+                - cp -f docker-compose.override.travis.yml docker-compose.override.yml
+                - bash docker/start.sh
+                - test -e docker-images/phpquiz-php.tar.gz && echo 'phpquiz-php image cache already
+                    exists' || (docker save phpquiz-php | gzip > docker-images/phpquiz-php.tar.gz)
+            script:
+                - docker exec -ti php /bin/bash -c 'bash install.sh'
+                - docker exec -ti php /bin/bash -c 'sleep 2; bash reset-data.sh --force'
+                - docker exec -ti php /bin/bash -c 'bash update.sh'
+                - docker exec -ti php /bin/bash -c 'bash test.sh'
         -   stage: deploy
             if: branch = master
             name: deploy
