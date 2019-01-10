@@ -19,7 +19,11 @@ RUN apt-get update -q -y \
     git \
     unzip \
     gettext \
-    acl
+    acl \
+    locales \
+    locales-all
+
+ENV LC_ALL en_US.UTF-8
 
 RUN \
 # PHP Extensions pour composer
