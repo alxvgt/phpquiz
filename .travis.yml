@@ -38,7 +38,7 @@ jobs:
                 - test -e docker-images/phpquiz-php.tar.gz && echo 'phpquiz-php image cache already
                     exists' || (docker save phpquiz-php | gzip > docker-images/phpquiz-php.tar.gz)
             script:
-                - docker exec -ti php /bin/bash -c 'sleep 3;'
+                - docker exec -ti php /bin/bash -c 'sleep 2;'
                 - docker exec -ti php /bin/bash -c 'bash reset-data.sh --force'
                 - docker exec -ti php /bin/bash -c 'bash install.sh'
                 - docker exec -ti php /bin/bash -c 'bash update.sh'
@@ -55,5 +55,5 @@ jobs:
                 - ssh-add ${SSH_DEPLOY_KEY_PATH}
             script:
                 - ssh -i ${SSH_DEPLOY_KEY_PATH} root@${DEPLOY_SERVER_HOST} "echo 'Connected, Hello !!!! '; hostname"
-                - scp -i ${SSH_DEPLOY_KEY_PATH} app/Resources/deploy/deploy.sh root@${DEPLOY_SERVER_HOST}:phpquiz/deploy.sh
-                - ssh -i ${SSH_DEPLOY_KEY_PATH} root@${DEPLOY_SERVER_HOST} "bash phpquiz/deploy.sh"
+                - scp -i ${SSH_DEPLOY_KEY_PATH} app/Resources/deploy/deploy.sh root@${DEPLOY_SERVER_HOST}:deploy/phpquiz/deploy.sh
+                - ssh -i ${SSH_DEPLOY_KEY_PATH} root@${DEPLOY_SERVER_HOST} "bash deploy/phpquiz/deploy.sh"
