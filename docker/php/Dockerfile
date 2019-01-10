@@ -23,7 +23,10 @@ RUN apt-get update -q -y \
     locales \
     locales-all
 
+ENV LANG en_US.UTF-8
 ENV LC_ALL en_US.UTF-8
+ENV LANGUAGE en_US.UTF-8
+RUN echo en_US UTF-8 >> /etc/locale.gen && locale-gen en_US.UTF-8 && DEBIAN_FRONTEND=noninteractive dpkg-reconfigure locales
 
 RUN \
 # PHP Extensions pour composer

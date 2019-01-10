@@ -25,6 +25,9 @@ then
     fi
 fi
 
+echo -e "\e[32m> Installing dependencies ...\e[0m"
+composer install -o -n 2>&1
+
 echo -e "\e[32m> Dropping database ...\e[0m"
 php bin/console doctrine:database:drop --if-exists --force
 

@@ -4,12 +4,14 @@ services:
         container_name: php
         build: ./docker/php
         image: phpquiz-php
+        restart: always
         entrypoint: /var/www/docker/php/entrypoint.sh
         volumes:
             - .:/var/www
     database:
         container_name: database
         image: mariadb
+        restart: always
         environment:
             - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
         volumes:
