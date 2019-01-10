@@ -29,6 +29,4 @@ crontab ./app/Resources/server/cron/crontab
 crontab -l
 
 echo -e "\e[32m> Creating database ...\e[0m"
-env
-apt-get update && apt-get install -y netcat && nc -zv database 3306
 php bin/console doctrine:database:create --if-not-exists
