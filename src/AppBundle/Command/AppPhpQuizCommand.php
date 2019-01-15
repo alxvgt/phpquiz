@@ -204,7 +204,7 @@ class AppPhpQuizCommand extends ContainerAwareCommand
     {
         $io->text('Beautifing code...');
         $originalCode = $code;
-        $code = '<?php'.$code;
+        $code = '<?php '.$code;
         $code = highlight_string($code, true);
 
         $io->text('Creating source code image...');
