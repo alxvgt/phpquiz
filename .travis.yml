@@ -38,11 +38,11 @@ jobs:
                 - test -e docker-images/phpquiz-php.tar.gz && echo 'phpquiz-php image cache already
                     exists' || (docker save phpquiz-php | gzip > docker-images/phpquiz-php.tar.gz)
             script:
-                - docker exec -ti phpquiz-php /bin/bash -c 'sleep 2;'
-                - docker exec -ti phpquiz-php /bin/bash -c 'bash reset-data.sh --force'
-                - docker exec -ti phpquiz-php /bin/bash -c 'bash install.sh'
-                - docker exec -ti phpquiz-php /bin/bash -c 'bash update.sh'
-                - docker exec -ti phpquiz-php /bin/bash -c 'bash test.sh'
+                - docker exec -ti phpquiz /bin/bash -c 'sleep 2;'
+                - docker exec -ti phpquiz /bin/bash -c 'bash reset-data.sh --force'
+                - docker exec -ti phpquiz /bin/bash -c 'bash install.sh'
+                - docker exec -ti phpquiz /bin/bash -c 'bash update.sh'
+                - docker exec -ti phpquiz /bin/bash -c 'bash test.sh'
         -   stage: deploy
             if: branch = master
             name: deploy
