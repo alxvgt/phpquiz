@@ -8,5 +8,5 @@ test -d ${SERVER_APP_PATH} && (cd ${SERVER_APP_PATH} && git checkout master && g
 cat deploy/phpquiz/.deploy.env deploy/phpquiz/.env > ${SERVER_APP_PATH}/.env
 cd ${SERVER_APP_PATH}
 bash docker/start.sh
-docker exec php /bin/bash -c 'bash install.sh'
-docker exec php /bin/bash -c 'bash update.sh'
+docker exec phpquiz /bin/bash -c 'bash install.sh'
+docker exec phpquiz /bin/bash -c 'bash update.sh'
